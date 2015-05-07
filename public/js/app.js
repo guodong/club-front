@@ -3,7 +3,8 @@ var club = angular.module("club", ['ngRoute'], function($interpolateProvider){
 	$interpolateProvider.startSymbol('[[');
     $interpolateProvider.endSymbol(']]');
 });
-club.config(function($routeProvider) {
+club.config(function($routeProvider, $httpProvider) {
+	$httpProvider.defaults.withCredentials = true;
 	$routeProvider.when('/', {
 		controller: 'MainCtrl',
 		templateUrl: 'tpl/main.html',
