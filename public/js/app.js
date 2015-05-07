@@ -11,6 +11,12 @@ club.config(function($routeProvider, $httpProvider) {
 	}).when('/login', {
 		controller: 'LoginCtrl',
 		templateUrl: 'tpl/login.html',
+	}).when('/ranking', {
+		controller: 'rankingCtrl',
+		templateUrl: 'tpl/ranking.html',
+	}).when('/activities_future', {
+		controller: 'activities_futureCtrl',
+		templateUrl: 'tpl/activities_future.html',
 	}).otherwise({
 		redirectTo: '/'
 	});
@@ -30,4 +36,9 @@ club.config(function($routeProvider, $httpProvider) {
 			}
 		});
 	}
+
+}).controller('rankingCtrl', function($scope, $route){
+
+}).controller('activities_futureCtrl', function($scope, $route){
+
 });
