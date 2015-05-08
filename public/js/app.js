@@ -8,11 +8,11 @@ club.config(function($routeProvider, $httpProvider) {
 	$routeProvider.when('/', {
 		controller: 'MainCtrl',
 		templateUrl: 'tpl/main.html',
-	}).when('/register', {
-		controller: 'registerCtrl',
+	}).when('/register_test', {
+		controller: 'register_testCtrl',
 		templateUrl: 'tpl/register.html',
-	}).when('/login', {
-		controller: 'LoginCtrl',
+	}).when('/login_test', {
+		controller: 'Login_testCtrl',
 		templateUrl: 'tpl/login.html',
 	}).when('/ranking', {
 		controller: 'rankingCtrl',
@@ -32,12 +32,69 @@ club.config(function($routeProvider, $httpProvider) {
 	}).when('/fabu', {
 		controller: 'fabuCtrl',
 		templateUrl: 'tpl/fabu.html',
+	
+	
+	//real_url
+	}).when('/login', {
+		controller: 'loginCtrl',
+		templateUrl: 'tpl/userlr/denglu.html',
+		
+	}).when('/tel_register', {
+		controller: 'tel_registerCtrl',
+		templateUrl: 'tpl/userlr/shoujizhuce.html',
+		
+    }).when('/get_psw', {
+    	controller: 'get_pswCtrl',
+    	templateUrl: 'tpl/userlr/zhaohuimima.html',
+	
+	
+	
 	}).otherwise({
 		redirectTo: '/'
 	});
+	
+
+
+
+
+//real_controller
+}).controller('loginCtrl', function($scope, $route, $http){
+	$scope.login = function(){
+	   var reg = /^0?1[3|4|5|8][0-9]\d{8}$/;
+	   if(reg.test($scope.name_input))
+	   {
+	      $scope.user={};
+	      $scope.user.tel=$scope.name_input;
+	      $scope.user.password=$scope.psd_input;
+		  $http({
+			  method: 'GET',
+			  url: API+'accesstoken',
+			  params: $scope.user
+		  }).success(function(d){
+			  if(!d.code){
+				  location.href="#/";
+			  }else{
+				  alert(d.msg);
+			  }
+		  });
+	   }else {
+	       alert("请正确输入手机号码");
+	   }
+	}
+
+}).controller('tel_registerCtrl', function($scope, $route){
+
+}).controller('get_pswCtrl', function($scope, $route){
+
+
+
+
+
+
+
 }).controller('MainCtrl', function($scope, $route){
 	
-}).controller('registerCtrl', function($scope, $route, $http){
+}).controller('register_testCtrl', function($scope, $route, $http){
 	$scope.submit = function(){
 		$http({
 			method: 'POST',
@@ -52,7 +109,7 @@ club.config(function($routeProvider, $httpProvider) {
 		});
 	}
 	
-}).controller('LoginCtrl', function($scope, $route, $http){
+}).controller('Login_testCtrl', function($scope, $route, $http){
 	$scope.login = function(){
 		$http({
 			method: 'GET',
